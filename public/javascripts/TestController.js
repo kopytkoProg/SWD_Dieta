@@ -5,5 +5,5 @@
 
 myApp.controller('TestController', function ($scope)
 {
-    $scope.txt = 'hello'
+    $scope.txt = 'hello World'
 });
