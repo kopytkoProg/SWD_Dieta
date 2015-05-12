@@ -4,9 +4,15 @@
  * Module dependencies.
  */
 
+var d = require('debug')
 var app = require('../app');
-var debug = require('debug')('SWD_Dieta:server');
 var http = require('http');
+
+/**
+ * Debug config
+ */
+d.enable('SWD_Dieta:server');
+var debug = d('SWD_Dieta:server');
 
 /**
  * Get port from environment and store in Express.
