@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var plan_for_one_day = require('./routes/plan_for_one_day');
 
 var app = express();
 
@@ -28,6 +29,7 @@ try
 {
     app.use('/', index);
     app.use('/users', users);
+    app.use('/plan_for_one_day', plan_for_one_day);
 } catch (e)
 {
     console.log(e)

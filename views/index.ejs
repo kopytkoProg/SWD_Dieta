@@ -3,19 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
+
+
+    <script type="text/javascript" src="/javascripts/jquery-2.1.4.js"></script>
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+
     <script type="text/javascript" src="/javascripts/angular.js"></script>
     <script type="text/javascript" src="/javascripts/my_app.js"></script>
     <script type="text/javascript" src="/javascripts/TestController.js"></script>
+    <script type="text/javascript" src="/javascripts/MyApp.js"></script>
 
 </head>
 
 <body ng-app="myApp">
+<div class="container">
 
-<div ng-controller="TestController">
-    <h1>{{txt}}</h1>
+
+    <div ng-controller="MyApp">
+        <h3>Wektor:</h3>
+        <hr>
+        <form name="prefered_vector_form">
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <label for="proteins">Białka:</label>
+                    <input type="number" step="any" min="0" max="50" class="form-control" id="proteins"
+                           placeholder="Białka" ng-model="v[0]">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="carbohydrates">Węglowodany:</label>
+                    <input type="number" step="any" min="0" max="70" class="form-control" id="carbohydrates"
+                           placeholder="Węglowodany" ng-model="v[1]">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="fats">Tłuszcze:</label>
+                    <input type="number" step="any" min="0" max="30" class="form-control" id="fats"
+                           placeholder="Tłuszcze" ng-model="v[2]">
+                </div>
+
+                <div class="form-group col-md-2  ">
+                    <label class="invisible">submit</label>
+                    <button type="submit" class="form-control btn btn-default " ng-click="send(v)">Pokaż diete</button>
+                </div>
+            </div>
+        </form>
+
+
+        <h3 ng-class="{hidden: plan.length == 0}">Plan: <span class="text-muted small">{{plan.g}}</span></h3>
+        <hr>
+        <div class="row" data-ng-repeat="p in plan.p">
+            <div class="form-group col-md-12">
+                <h4>{{p.type}}</h4>
+                <ul>
+                    <li data-ng-repeat="i in p.ingredients"><a href="{{i.addr}}">{{i.nazwa}}, {{i.waga}}</a></li>
+                </ul>
+                <div>{{p.v}}</div>
+
+            </div>
+        </div>
+
+
+    </div>
+
 </div>
 
+
+</div>
 
 </body>
 </html>

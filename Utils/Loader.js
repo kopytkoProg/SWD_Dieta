@@ -22,9 +22,13 @@ var Loader = {
         var meals = [[], [], [], [], []];
 
         fs = require('fs');
-        fs.readFile('../daniaParsed.json', function (err, data)
+        fs.readFile('./daniaParsed.json', function (err, data)
         {
-            if (err) callback(err, null);
+            if (err)
+            {
+                callback(err, null);
+                return err;
+            }
 
             var arr = JSON.parse(data);
 
