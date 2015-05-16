@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+
+
+    <script type="text/javascript" src="/javascripts/jquery-2.1.4.js"></script>
+
+
+    <!--&lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="/css/bootstrap.min.css">-->
+
+    <!--&lt;!&ndash; Optional theme &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="/css/bootstrap-theme.min.css">-->
+
+    <!--&lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
+    <!--<script src="/js/bootstrap.min.js"></script>-->
+
+    <!-- -->
+    <script type="text/javascript" src="/polymer/polymer.js"></script>
+
+
+    <script type="text/javascript" src="/javascripts/angular.js"></script>
+    <script type="text/javascript" src="/javascripts/my_app.js"></script>
+    <script type="text/javascript" src="/javascripts/TestController.js"></script>
+    <script type="text/javascript" src="/javascripts/MyApp.js"></script>
+
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+
+
+    <!--&lt;!&ndash;Let browser know website is optimized for mobile&ndash;&gt;-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>-->
+
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+
+</head>
+
+<body ng-app="myApp">
+<div class="container">
+
+
+    <div ng-controller="MyApp">
+        <h3>Ile chcesz zjeść średnio w każdym posiłku:</h3>
+
+        <form name="prefered_vector_form" >
+            <div class="row">
+                <div class="input-field col s2">
+                    <label for="proteins">Białka:</label>
+                    <input type="number" step="any" min="0" max="50" class="form-control" id="proteins"
+                           placeholder="Białka" ng-model="v[0]" value="10">
+                </div>
+                <div class="input-field col s2">
+                    <label for="carbohydrates">Węglowodany:</label>
+                    <input type="number" step="any" min="0" max="70" class="form-control" id="carbohydrates"
+                           placeholder="Węglowodany" ng-model="v[1]" value="10">
+                </div>
+
+
+                <div class="input-field col s2">
+                    <input type="number" step="any" min="0" max="30" class="form-control" id="fats"
+                           placeholder="Tłuszcze" ng-model="v[2]" value="10" class="validate">
+                    <label for="fats">Tłuszcze</label>
+                </div>
+
+
+
+
+                <div class="col s2 ">
+                    <label style="visibility: hidden">submit</label>
+                    <button type="submit" class="waves-effect waves-light btn" ng-click="send(v)">Pokaż dietę</button>
+                </div>
+            </div>
+        </form>
+
+
+        <h3 ng-class="{hide: plan.length == 0}">Plan dnia:</h3>
+        <span class="text-muted small">{{plan.g}}</span>
+        <div class="" data-ng-repeat="p in plan.p">
+            <div class="form-group col-md-12">
+                <h5>{{p.type}}</h5>
+                <ul>
+                    <li data-ng-repeat="i in p.ingredients"><a href="{{i.addr}}">{{i.nazwa}}, {{i.waga}}</a></li>
+                </ul>
+                <div>{{p.v}}</div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+</div>
+
+</body>
+</html>

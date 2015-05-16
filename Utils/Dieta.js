@@ -1,6 +1,9 @@
 var Vector = require('./Vector')
 
+var norm = [4 / (4 + 4 + 9), 4 / (4 + 4 + 9), 9 / (4 + 4 + 9)];
+
 var Dieta = {
+
 
     g: function (meals, predeterminedVector)
     {
@@ -13,7 +16,7 @@ var Dieta = {
         var euclideanDistance = 0;
         for (var i = 0; i < predeterminedVector.length; i++)
         {
-            euclideanDistance += Math.pow(predeterminedVector[i] - dividedVector[i], 2)
+            euclideanDistance += Math.pow((predeterminedVector[i] - dividedVector[i]) * norm[i] , 2)
         }
         euclideanDistance = Math.sqrt(euclideanDistance);
 
@@ -55,7 +58,6 @@ var Dieta = {
         return best;
     }
 };
-
 
 
 module.exports = Dieta;

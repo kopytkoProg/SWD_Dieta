@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <!--<link rel="stylesheet" href="/css/bootstrap-theme.min.css">-->
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
@@ -23,50 +23,106 @@
     <script type="text/javascript" src="/javascripts/TestController.js"></script>
     <script type="text/javascript" src="/javascripts/MyApp.js"></script>
 
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+
 </head>
 
 <body ng-app="myApp">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-right" role="search">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="Debug"> Debug
+                    </label>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</nav>
+
+
 <div class="container">
 
 
     <div ng-controller="MyApp">
-        <h3>Wektor:</h3>
+        <h3>Ile chcesz zjeść w ciągu dnia:</h3>
         <hr>
-        <form name="prefered_vector_form">
+        <form name="prefered_vector_form" ng-init="v = [75, 50, 75]">
             <div class="row">
                 <div class="form-group col-md-2">
                     <label for="proteins">Białka:</label>
-                    <input type="number" step="any" min="0" max="50" class="form-control" id="proteins"
+                    <input type="number" step="any" min="0" max="400" class="form-control" id="proteins"
                            placeholder="Białka" ng-model="v[0]">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="carbohydrates">Węglowodany:</label>
-                    <input type="number" step="any" min="0" max="70" class="form-control" id="carbohydrates"
+                    <input type="number" step="any" min="0" max="500" class="form-control" id="carbohydrates"
                            placeholder="Węglowodany" ng-model="v[1]">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="fats">Tłuszcze:</label>
-                    <input type="number" step="any" min="0" max="30" class="form-control" id="fats"
+                    <input type="number" step="any" min="0" max="300" class="form-control" id="fats"
                            placeholder="Tłuszcze" ng-model="v[2]">
                 </div>
 
                 <div class="form-group col-md-2  ">
                     <label class="invisible">submit</label>
-                    <button type="submit" class="form-control btn btn-default " ng-click="send(v)">Pokaż diete</button>
+                    <button type="submit" class="form-control btn btn-default " ng-click="send(v)">Pokaż dietę</button>
                 </div>
             </div>
         </form>
 
 
-        <h3 ng-class="{hidden: plan.length == 0}">Plan: <span class="text-muted small">{{plan.g}}</span></h3>
+        <h3 ng-class="{hidden: plan.length == 0}">
+            Plan {{plan.kcal}} kcal:
+            <span class="text-muted small" ng-class="{hidden: !Debug}">
+                {{plan.g}}
+            </span>
+        </h3>
+
+        <div>
+            <span ng-class="{hidden: plan.length == 0}">
+                <span style="display: inline-block;width: 150px">Śrenio na posiłek:</span>
+                <span class="text-muted">Białka:</span> {{plan.avg[0]}},
+                <span class="text-muted">Węglowodany:</span> {{plan.avg[1]}},
+                <span class="text-muted">Tłuszcze:</span> {{plan.avg[2]}}
+            </span>
+        </div>
+        <div>
+            <span ng-class="{hidden: plan.length == 0}">
+                <span style="display: inline-block;width: 150px">Suma:</span>
+                <span class="text-muted">Białka:</span> {{plan.sum[0]}},
+                <span class="text-muted">Węglowodany:</span> {{plan.sum[1]}},
+                <span class="text-muted">Tłuszcze:</span> {{plan.sum[2]}}
+            </span>
+        </div>
         <hr>
+
         <div class="row" data-ng-repeat="p in plan.p">
             <div class="form-group col-md-12">
-                <h4>{{p.type}}</h4>
+                <h4>
+                    {{p.type}}
+                    <span ng-class="{hidden: !Debug}" class="text-muted small">
+                        [B: {{p.v[0]}}, W: {{p.v[1]}}, T: {{p.v[2]}}]
+                    </span>
+                </h4>
                 <ul>
-                    <li data-ng-repeat="i in p.ingredients"><a href="{{i.addr}}">{{i.nazwa}}, {{i.waga}}</a></li>
+                    <li data-ng-repeat="i in p.ingredients"><a target="_blank" href="{{i.addr}}">{{i.nazwa}}, {{i.waga}} {{i.jednostka}}</a></li>
                 </ul>
-                <div>{{p.v}}</div>
+
 
             </div>
         </div>
