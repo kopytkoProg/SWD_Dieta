@@ -119,8 +119,16 @@
                         [B: {{p.v[0]}}, W: {{p.v[1]}}, T: {{p.v[2]}}]
                     </span>
                 </h4>
-                <ul>
-                    <li data-ng-repeat="i in p.ingredients"><a target="_blank" href="{{i.addr}}">{{i.nazwa}}, {{i.waga}} {{i.jednostka}}</a></li>
+                <ul >
+                    <li data-ng-repeat="i in p.ingredients"><a target="_blank" href="{{i.addr}}">
+
+                                    <!--<span style="width: 400px; display: inline-block">{{i.nazwa}},</span>-->
+                                    <!--<span>{{i.waga}} {{i.jednostka}}</span>-->
+
+                            {{i.nazwa}}, {{i.waga}} {{i.jednostka}}
+
+
+                        </a></li>
                 </ul>
 
 

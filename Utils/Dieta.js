@@ -1,6 +1,19 @@
 var Vector = require('./Vector')
 
-var norm = [4 / (4 + 4 + 9), 4 / (4 + 4 + 9), 9 / (4 + 4 + 9)];
+/****
+ * 1 gram białka: 4 kCal
+ * 1 gram węglowodanów: 4 kCal
+ * 1 gram tłuszczu: 9 kCal
+ *
+ * W diecie: Białko 15%, Tłuszcz 30%, Węglowodany 55% (Procentowa wartość kcal)
+ *
+ *
+ *
+ *  norm = normalizacja([4 * 0.15, 4 * 0.55, 9 * 0.30])
+ * @type {number[]}
+ */
+
+// var norm = [0.109, 0.4, 0.490];
 
 var Dieta = {
 
@@ -16,7 +29,7 @@ var Dieta = {
         var euclideanDistance = 0;
         for (var i = 0; i < predeterminedVector.length; i++)
         {
-            euclideanDistance += Math.pow((predeterminedVector[i] - dividedVector[i]) * norm[i] , 2)
+            euclideanDistance += Math.pow((predeterminedVector[i] - dividedVector[i]) /* norm[i]*/, 2)
         }
         euclideanDistance = Math.sqrt(euclideanDistance);
 

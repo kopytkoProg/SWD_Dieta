@@ -29,7 +29,8 @@ var Loader = {
     {
 
         if (typeof path != 'string')
-            path = './daniaParsedAndIncreased.json';
+            //path = './daniaParsedAndIncreased.json';
+             path = './daniaParsedAndIncreasedAndLimited.json';
 
         fs = require('fs');
         fs.readFile(path, function (err, data)

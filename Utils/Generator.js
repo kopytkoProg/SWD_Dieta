@@ -5,61 +5,78 @@ var Loader = require('./Loader');
 
 
 Loader.load(function (err, data)
-{
-    if (err) console.log(err);
-    var i = 0;
-
-    /***
-     * @param {Meal} d
-     * @param {number} m
-     * @return {Meal}
-     */
-    var createNew = function (d, m)
     {
-        var n = d.clone();
-        n.id += 1000000 * m;
-        n.fats *= m;
-        n.proteins *= m;
-        n.carbohydrates *= m;
-        n.weight *= m;
+        if (err) console.log(err);
+        var treshold = 700;
 
-        n.v = [n.proteins, n.carbohydrates, n.fats];
-
-        n.ingredients.forEach(function (i)
+        /***
+         * @param {Meal} d
+         * @param {number} m
+         * @return {Meal}
+         */
+        var createNew = function (d, m)
         {
-            i.waga *= m;
-        });
+            var n = d.clone();
+            n.id += 1000000 * m;
+            n.fats *= m;
+            n.proteins *= m;
+            n.carbohydrates *= m;
+            n.weight *= m;
 
-        n.best = [n];
-        return n;
-    };
+            n.v = [n.proteins, n.carbohydrates, n.fats];
 
-    data.forEach(function (m)
-    {
-        m.forEach(function (d)
-        {
+            n.ingredients.forEach(function (i)
+            {
+                i.waga *= m;
+            });
 
-            m.push(createNew(d, 1.5));
-            m.push(createNew(d, 2));
-            m.push(createNew(d, 2.5));
-            // m.push(createNew(d, 3));
-        })
-    });
+            n.best = [n];
+            return n;
+        };
 
-
-    function s()
-    {
         data.forEach(function (m)
         {
+            var r = 0
             m.forEach(function (d)
             {
-                d.best = null
+                {
+                    var n = createNew(d, 1.5);
+                    if (n.weight <= treshold) m.push(n);
+                    else r++;
+                }
+
+                {
+                    var n = createNew(d, 2);
+                    if (n.weight <= treshold) m.push(n);
+                    else r++;
+                }
+                {
+                    var n = createNew(d, 2.5);
+                    if (n.weight <= treshold) m.push(n);
+                    else r++;
+                }
+            });
+
+            console.log("deleted: " + r)
+        });
+
+
+        function s()
+        {
+            data.forEach(function (m)
+            {
+                m.forEach(function (d)
+                {
+                    d.best = null
+                })
             })
-        })
-    }
+        }
 
-    s()
-    fs.writeFile('../daniaParsedAndIncreased.json', JSON.stringify(data, null, 4), 'utf8')
-    //console.log(JSON.stringify(data, null, 4));
+        s()
+        fs.writeFile('../daniaParsedAndIncreasedAndLimited.json', JSON.stringify(data, null, 4), 'utf8')
+//console.log(JSON.stringify(data, null, 4));
 
-}, '../daniaParsed.json');
+    },
+    '../daniaParsed.json'
+)
+;
