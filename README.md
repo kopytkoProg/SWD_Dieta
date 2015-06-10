@@ -1,6 +1,6 @@
 # SWD_Dieta
 
-Aby uruchomić należy zainstalować node.js a nastpnie uruchomić z gównego katalogu skrypt bin\www.
+Aby uruchomić należy zainstalować node.js, a nastpnie uruchomić z gównego katalogu skrypt bin\www.
 
 Przykad: ```C:\SWD_Dieta> node bin\www```
 
